@@ -8,20 +8,20 @@ app = dash.Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 navbar = dbc.NavbarSimple(
     children=[
-        dbc.Button("Sidebar", outline=True, color="secondary", className="mr-1", id="btn_sidebar"),
-        dbc.NavItem(dbc.NavLink("Page 1", href="#")),
+        dbc.Button("Toggle sidebar", outline=True, color="secondary", className="mr-1", id="btn_sidebar"),
+        dbc.NavItem(dbc.NavLink("Top", href="#")),
         dbc.DropdownMenu(
             children=[
                 dbc.DropdownMenuItem("More pages", header=True),
-                dbc.DropdownMenuItem("Page 2", href="#"),
-                dbc.DropdownMenuItem("Page 3", href="#"),
+                dbc.DropdownMenuItem("Page 2", href="page-2"),
+                dbc.DropdownMenuItem("Page 3", href="page-3"),
             ],
             nav=True,
             in_navbar=True,
             label="More",
         ),
     ],
-    brand="Dash Bootstrap Components デモ",
+    brand="Dash Bootstrap Components Demo",
     brand_href="#",
     color="dark",
     dark=True,
@@ -58,6 +58,10 @@ SIDEBAR_HIDEN = {
     "background-color": "#f8f9fa",
 }
 
+SIDEBAR_TOGGLE = {
+    "margin-left": "12rem",
+}
+
 # the styles for the main content position it to the right of the sidebar and
 # add some padding.
 CONTENT_STYLE = {
@@ -92,13 +96,14 @@ sidebar = html.Div(
             vertical=True,
             pills=True,
         ),
+        html.H2("hello", className="display-5"),
+        dbc.Button("<<", outline=True, color="secondary", style=SIDEBAR_TOGGLE),
     ],
     id="sidebar",
     style=SIDEBAR_STYLE,
 )
 
 content = html.Div(
-
     id="page-content",
     style=CONTENT_STYLE)
 
