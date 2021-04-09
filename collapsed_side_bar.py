@@ -159,6 +159,26 @@ def toggle_active_links(pathname):
         return True, False, False
     return [pathname == f"/page-{i}" for i in range(1, 4)]
 
+page3 = html.Div(
+    [
+        html.H2("Content of page 3", className="display-4"),
+        html.Hr(),
+        html.P(
+            "A simple sidebar layout with navigation links", className="lead"
+        ),
+        dbc.Nav(
+            [
+                dbc.NavLink("Page 1", href="/page-1", id="page-1-link"),
+                dbc.NavLink("Page 2", href="/page-2", id="page-2-link"),
+                dbc.NavLink("Page 3", href="/page-3", id="page-3-link"),
+            ],
+            vertical=True,
+            pills=True,
+        ),
+        html.H2("hello", className="display-5"),
+        dbc.Button("<<", outline=True, color="secondary", style=SIDEBAR_TOGGLE),
+    ],
+)
 
 @app.callback(Output("page-content", "children"), [Input("url", "pathname")])
 def render_page_content(pathname):
@@ -167,7 +187,8 @@ def render_page_content(pathname):
     elif pathname == "/page-2":
         return html.P("This is the content of page 2. Yay!")
     elif pathname == "/page-3":
-        return html.P("Oh cool, this is page 3!")
+        return page3
+        #return html.P("Oh cool, this is page 3!")
     # If the user tries to reach a different page, return a 404 message
     return dbc.Jumbotron(
         [
